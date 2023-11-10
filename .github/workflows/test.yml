@@ -27,7 +27,7 @@ jobs:
       # Checkout repository
       # ------------------------------------------------------------
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -47,4 +47,4 @@ jobs:
           }
           retry make test
         env:
-          RETRIES: 20
+          RETRIES: 1

@@ -33,7 +33,7 @@ jobs:
       # Setup repository
       # ------------------------------------------------------------
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -59,4 +59,4 @@ jobs:
           git diff --quiet || { echo "Build Changes"; git diff; git status; false; }
         env:
           TARGET: ${{ matrix.target }}
-          RETRIES: 20
+          RETRIES: 1

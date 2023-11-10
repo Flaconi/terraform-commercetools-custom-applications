@@ -1,0 +1,11 @@
+function handler(event) {
+    var request = event.request;
+    var uri = request.uri;
+    var app = ${applications}.find(app => uri.includes(`/$${app}/flaconi-`));
+
+    if (app !== undefined) {
+        request.uri = `/$${app}/index.html`;
+    }
+
+    return request;
+}

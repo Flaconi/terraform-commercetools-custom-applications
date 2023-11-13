@@ -215,16 +215,6 @@ import {
 }
 
 import {
-  to = module.ssm["ct-mc-custom-app-price-upload"].aws_ssm_parameter.this["access_key_id"]
-  id = "/lite/dev/eu-central-1/applications/ct-mc-custom-app-price-upload/access_key_id"
-}
-
-import {
-  to = module.ssm["ct-mc-custom-app-price-upload"].aws_ssm_parameter.this["access_key_secret"]
-  id = "/lite/dev/eu-central-1/applications/ct-mc-custom-app-price-upload/access_key_secret"
-}
-
-import {
   to = module.ssm["ct-mc-custom-app-price-upload"].aws_ssm_parameter.this["application_id"]
   id = "/lite/dev/eu-central-1/applications/ct-mc-custom-app-price-upload/application_id"
 }

@@ -285,26 +285,26 @@ import {
 }
 
 import {
-  to = module.ssm["mc-subscribers-app"].aws_ssm_parameter.this["application_id"]
+  to = module.ssm["ct-custom-app-subscribers"].aws_ssm_parameter.this["application_id"]
   id = "/lite/dev/eu-central-1/applications/ct-custom-app-subscribers/application_id"
 }
 
 import {
-  to = module.ssm["mc-subscribers-app"].aws_ssm_parameter.this["bucket_name"]
+  to = module.ssm["ct-custom-app-subscribers"].aws_ssm_parameter.this["bucket_name"]
   id = "/lite/dev/eu-central-1/applications/ct-custom-app-subscribers/bucket_name"
 }
 
 import {
-  to = module.ssm["mc-subscribers-app"].aws_ssm_parameter.this["cloudfront_domain_name"]
+  to = module.ssm["ct-custom-app-subscribers"].aws_ssm_parameter.this["cloudfront_domain_name"]
   id = "/lite/dev/eu-central-1/applications/ct-custom-app-subscribers/cloudfront_domain_name"
 }
 
 import {
-  to = module.ssm["mc-subscribers-app"].aws_ssm_parameter.this["subscribers_api_client_id"]
+  to = module.ssm["ct-custom-app-subscribers"].aws_ssm_parameter.this["subscribers_api_client_id"]
   id = "/lite/dev/eu-central-1/applications/ct-custom-app-subscribers/subscribers_api_client_id"
 }
 
 import {
-  to = module.ssm["mc-subscribers-app"].aws_ssm_parameter.this["subscribers_api_client_secret"]
+  to = module.ssm["ct-custom-app-subscribers"].aws_ssm_parameter.this["subscribers_api_client_secret"]
   id = "/lite/dev/eu-central-1/applications/ct-custom-app-subscribers/subscribers_api_client_secret"
 }

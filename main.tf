@@ -40,7 +40,7 @@ module "ssm" {
 module "cdn" {
 
   create_distribution = length(var.applications) > 0
-  source              = "github.com/terraform-aws-modules/terraform-aws-cloudfront?ref=v3.2.1"
+  source              = "github.com/terraform-aws-modules/terraform-aws-cloudfront?ref=v3.4.0"
   enabled             = true
   is_ipv6_enabled     = true
   default_root_object = "index.html"
@@ -74,25 +74,43 @@ module "cdn" {
     restriction_type = "none"
     locations        = []
   }
-  ordered_cache_behavior = []
+  ordered_cache_behavior = [
+    {
+      path_pattern           = "/*.js"
+      target_origin_id       = "ctCustomerAppBucket"
+      viewer_protocol_policy = "redirect-to-https"
+
+      allowed_methods = ["GET", "HEAD", "OPTIONS"]
+      cached_methods  = ["GET", "HEAD"]
+
+      use_forwarded_values = false
+      compress             = true
+      cache_policy_name    = "Managed-CachingOptimized"
+    },
+    {
+      path_pattern           = "/*.css"
+      target_origin_id       = "ctCustomerAppBucket"
+      viewer_protocol_policy = "redirect-to-https"
+
+      allowed_methods = ["GET", "HEAD", "OPTIONS"]
+      cached_methods  = ["GET", "HEAD"]
+
+      use_forwarded_values = false
+      compress             = true
+      cache_policy_name    = "Managed-CachingOptimized"
+    },
+
+  ]
 
   default_cache_behavior = {
     allowed_methods         = ["GET", "HEAD", "OPTIONS"]
     cached_methods          = ["GET", "HEAD"]
-    compress                = true
-    query_string            = true
     target_origin_id        = "ctCustomerAppBucket"
+    cache_policy_name       = "Managed-CachingDisabled"
     query_string_cache_keys = []
-    cookies_forward         = "none"
-    headers = [
-      "Access-Control-Request-Headers",
-      "Access-Control-Request-Method",
-      "Origin"
-    ]
-    viewer_protocol_policy = "redirect-to-https"
-    min_ttl                = 0
-    default_ttl            = 3600
-    max_ttl                = 86400
+    use_forwarded_values    = false
+    compress                = true
+    viewer_protocol_policy  = "redirect-to-https"
 
     function_association = {
       viewer-request = {
@@ -122,7 +140,7 @@ module "cdn" {
 }
 
 module "s3" {
-  source = "github.com/terraform-aws-modules/terraform-aws-s3-bucket?ref=v3.15.1"
+  source = "github.com/terraform-aws-modules/terraform-aws-s3-bucket?ref=v4.1.2"
 
   create_bucket = length(var.applications) > 0
   bucket        = var.bucket_name

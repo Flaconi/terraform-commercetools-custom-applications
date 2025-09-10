@@ -16,7 +16,7 @@ Module to setup cloudfront, s3 and ssm for custom applications
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 6.0 |
 
 <!-- TFDOCS_PROVIDER_END -->
 
@@ -25,8 +25,8 @@ Module to setup cloudfront, s3 and ssm for custom applications
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.3 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.5 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 6.0 |
 
 <!-- TFDOCS_REQUIREMENTS_END -->
 

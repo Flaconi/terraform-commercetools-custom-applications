@@ -8,6 +8,12 @@ variable "bucket_name" {
   type        = string
 }
 
+variable "attach_deny_insecure_transport_policy" {
+  description = "Controls if S3 bucket should have deny non-SSL transport policy attached"
+  type        = bool
+  default     = true
+}
+
 variable "cdn_logging_bucket_name" {
   description = "bucket where the cloudfront logs will be send to"
   type        = string

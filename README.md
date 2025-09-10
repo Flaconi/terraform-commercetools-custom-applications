@@ -87,6 +87,14 @@ map(object({
 
 The following input variables are optional (have default values):
 
+### <a name="input_attach_deny_insecure_transport_policy"></a> [attach\_deny\_insecure\_transport\_policy](#input\_attach\_deny\_insecure\_transport\_policy)
+
+Description: Controls if S3 bucket should have deny non-SSL transport policy attached
+
+Type: `bool`
+
+Default: `true`
+
 ### <a name="input_tags"></a> [tags](#input\_tags)
 
 Description: Map of custom tags for the provisioned resources

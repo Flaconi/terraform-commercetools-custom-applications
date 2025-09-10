@@ -11,7 +11,7 @@ resource "aws_cloudfront_function" "rewrite_sub_folder_index" {
 }
 
 module "ssm" {
-  source = "github.com/Flaconi/terraform-aws-ssm-store?ref=v1.1.0"
+  source = "github.com/Flaconi/terraform-aws-ssm-store?ref=v2.0.0"
 
   for_each = var.applications
 
@@ -34,13 +34,11 @@ module "ssm" {
       value = each.value.application_id
     },
   ], each.value.additional_ssm_parameters)
-
 }
 
 module "cdn" {
-
   create_distribution = length(var.applications) > 0
-  source              = "github.com/terraform-aws-modules/terraform-aws-cloudfront?ref=v3.4.0"
+  source              = "github.com/terraform-aws-modules/terraform-aws-cloudfront?ref=v5.0.0"
   enabled             = true
   is_ipv6_enabled     = true
   default_root_object = "index.html"
@@ -140,7 +138,7 @@ module "cdn" {
 }
 
 module "s3" {
-  source = "github.com/terraform-aws-modules/terraform-aws-s3-bucket?ref=v4.1.2"
+  source = "github.com/terraform-aws-modules/terraform-aws-s3-bucket?ref=v5.7.0"
 
   create_bucket = length(var.applications) > 0
   bucket        = var.bucket_name

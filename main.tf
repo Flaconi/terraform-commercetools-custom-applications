@@ -144,38 +144,15 @@ module "s3" {
   bucket        = var.bucket_name
   tags          = var.tags
 
-  acl                  = "private"
+  acl = "private"
+
+  attach_policy = true
+  policy        = data.aws_iam_policy_document.this.json
+
   attach_public_policy = false
+
+  attach_deny_insecure_transport_policy = var.attach_deny_insecure_transport_policy
 
   control_object_ownership = true
   object_ownership         = "ObjectWriter"
-}
-
-resource "aws_s3_bucket_policy" "cloudfront" {
-  bucket = module.s3.s3_bucket_id
-  policy = data.aws_iam_policy_document.cloudfront.json
-}
-
-data "aws_iam_policy_document" "cloudfront" {
-  statement {
-    sid = "AllowCloudFrontServicePrincipalReadOnly"
-    principals {
-      type        = "Service"
-      identifiers = ["cloudfront.amazonaws.com"]
-    }
-
-    actions = [
-      "s3:GetObject",
-    ]
-
-    resources = [
-      "${module.s3.s3_bucket_arn}/*",
-    ]
-
-    condition {
-      test     = "StringEquals"
-      values   = ["arn:aws:cloudfront::${var.aws_account_id}:distribution/${module.cdn.cloudfront_distribution_id}"]
-      variable = "AWS:SourceArn"
-    }
-  }
 }

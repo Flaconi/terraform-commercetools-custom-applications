@@ -37,7 +37,7 @@ module "ssm" {
 }
 
 module "cdn" {
-  create_distribution = length(var.applications) > 0
+  create              = length(var.applications) > 0
   source              = "github.com/terraform-aws-modules/terraform-aws-cloudfront?ref=v6.7.1"
   enabled             = true
   is_ipv6_enabled     = true
@@ -46,7 +46,6 @@ module "cdn" {
 
   tags = var.tags
 
-  create_origin_access_control = true
   origin_access_control = {
     "${var.app_name}-origin-access-control" = {
       description      = "Origin access control for s3 bucket ${module.s3.s3_bucket_id}"
@@ -58,8 +57,8 @@ module "cdn" {
 
   origin = {
     ctCustomerAppBucket = {
-      domain_name           = module.s3.s3_bucket_bucket_regional_domain_name
-      origin_access_control = "${var.app_name}-origin-access-control"
+      domain_name               = module.s3.s3_bucket_bucket_regional_domain_name
+      origin_access_control_key = "${var.app_name}-origin-access-control"
     }
   }
 
@@ -68,9 +67,11 @@ module "cdn" {
     prefix = var.app_name
   }
 
-  geo_restriction = {
-    restriction_type = "none"
-    locations        = []
+  restrictions = {
+    geo_restriction = {
+      restriction_type = "none"
+      locations        = []
+    }
   }
   ordered_cache_behavior = [
     {
@@ -81,9 +82,8 @@ module "cdn" {
       allowed_methods = ["GET", "HEAD", "OPTIONS"]
       cached_methods  = ["GET", "HEAD"]
 
-      use_forwarded_values = false
-      compress             = true
-      cache_policy_name    = "Managed-CachingOptimized"
+      compress          = true
+      cache_policy_name = "Managed-CachingOptimized"
     },
     {
       path_pattern           = "/*.css"
@@ -93,22 +93,19 @@ module "cdn" {
       allowed_methods = ["GET", "HEAD", "OPTIONS"]
       cached_methods  = ["GET", "HEAD"]
 
-      use_forwarded_values = false
-      compress             = true
-      cache_policy_name    = "Managed-CachingOptimized"
+      compress          = true
+      cache_policy_name = "Managed-CachingOptimized"
     },
 
   ]
 
   default_cache_behavior = {
-    allowed_methods         = ["GET", "HEAD", "OPTIONS"]
-    cached_methods          = ["GET", "HEAD"]
-    target_origin_id        = "ctCustomerAppBucket"
-    cache_policy_name       = "Managed-CachingDisabled"
-    query_string_cache_keys = []
-    use_forwarded_values    = false
-    compress                = true
-    viewer_protocol_policy  = "redirect-to-https"
+    allowed_methods        = ["GET", "HEAD", "OPTIONS"]
+    cached_methods         = ["GET", "HEAD"]
+    target_origin_id       = "ctCustomerAppBucket"
+    cache_policy_name      = "Managed-CachingDisabled"
+    compress               = true
+    viewer_protocol_policy = "redirect-to-https"
 
     function_association = {
       viewer-request = {

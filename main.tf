@@ -38,7 +38,7 @@ module "ssm" {
 
 module "cdn" {
   create_distribution = length(var.applications) > 0
-  source              = "github.com/terraform-aws-modules/terraform-aws-cloudfront?ref=v5.0.0"
+  source              = "github.com/terraform-aws-modules/terraform-aws-cloudfront?ref=v6.7.1"
   enabled             = true
   is_ipv6_enabled     = true
   default_root_object = "index.html"

@@ -138,7 +138,7 @@ module "cdn" {
 }
 
 module "s3" {
-  source = "github.com/terraform-aws-modules/terraform-aws-s3-bucket?ref=v5.7.0"
+  source = "github.com/terraform-aws-modules/terraform-aws-s3-bucket?ref=v5.17.0"
 
   create_bucket = length(var.applications) > 0
   bucket        = var.bucket_name

@@ -38,7 +38,7 @@ module "ssm" {
 
 module "cdn" {
   create_distribution = length(var.applications) > 0
-  source              = "github.com/terraform-aws-modules/terraform-aws-cloudfront?ref=v5.0.0"
+  source              = "github.com/terraform-aws-modules/terraform-aws-cloudfront?ref=v6.7.1"
   enabled             = true
   is_ipv6_enabled     = true
   default_root_object = "index.html"
@@ -138,7 +138,7 @@ module "cdn" {
 }
 
 module "s3" {
-  source = "github.com/terraform-aws-modules/terraform-aws-s3-bucket?ref=v5.7.0"
+  source = "github.com/terraform-aws-modules/terraform-aws-s3-bucket?ref=v5.17.0"
 
   create_bucket = length(var.applications) > 0
   bucket        = var.bucket_name

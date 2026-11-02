@@ -1,0 +1,20 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: terraform-commercetools-custom-applications
+  description: >
+    Module to setup cloudfront, s3 and ssm for custom applications
+  annotations:
+    github.com/project-slug: Flaconi/terraform-commercetools-custom-applications
+  tags:
+    - terraform
+    - commercetools
+    - aws
+    - cloudfront
+    - s3
+
+spec:
+  type: library
+  lifecycle: production
+  owner: group:platform
+  providesApis: []
